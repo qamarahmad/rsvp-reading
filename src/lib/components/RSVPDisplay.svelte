@@ -105,9 +105,10 @@
 
   .before-orp {
     position: absolute;
-    right: calc(50% + 0.5ch);
+    left: 50%;
+    transform: translateX(calc(-100% - 0.5ch));
     color: #fff;
-    text-align: right;
+    direction: ltr;
   }
 
   .after-orp {

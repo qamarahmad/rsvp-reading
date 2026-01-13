@@ -129,4 +129,4 @@ jobs:
           echo ""
           echo "DigitalOcean App Platform will automatically deploy from the main branch."
           echo ""
-          echo "View your app at: https://your-app.ondigitalocean.app"
+          echo "View your app at: https://rsvp.n0name.eu"
