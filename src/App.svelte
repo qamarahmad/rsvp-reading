@@ -312,11 +312,26 @@
     </div>
 
     {#if !isFocusMode}
-      <div class="shortcuts">
+      <div class="shortcuts desktop-only">
         <kbd>Space</kbd> Play
         <kbd>Esc</kbd> Stop
         <kbd>↑↓</kbd> Speed
         <kbd>←→</kbd> Skip
+      </div>
+      <div class="touch-controls mobile-only">
+        <button class="touch-btn" on:click={() => currentWordIndex = Math.max(0, currentWordIndex - 5)} title="Back 5 words">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/></svg>
+        </button>
+        <button class="touch-btn" on:click={() => wordsPerMinute = Math.max(50, wordsPerMinute - 50)} title="Slower">
+          <span>−WPM</span>
+        </button>
+        <span class="wpm-display">{wordsPerMinute}</span>
+        <button class="touch-btn" on:click={() => wordsPerMinute = Math.min(1000, wordsPerMinute + 50)} title="Faster">
+          <span>+WPM</span>
+        </button>
+        <button class="touch-btn" on:click={() => currentWordIndex = Math.min(words.length, currentWordIndex + 5)} title="Forward 5 words">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8.59 16.59L10 18l6-6-6-6-1.41 1.41L13.17 12z"/></svg>
+        </button>
       </div>
     {/if}
   </div>
@@ -328,10 +343,14 @@
     margin: 0;
     padding: 0;
     overflow: hidden;
+    position: fixed;
+    width: 100%;
+    height: 100%;
   }
 
   main {
-    min-height: 100vh;
+    height: 100vh;
+    height: 100dvh; /* Dynamic viewport height for mobile */
     display: flex;
     flex-direction: column;
     background-color: #000;
@@ -340,6 +359,7 @@
     padding: 2rem;
     box-sizing: border-box;
     transition: padding 0.3s ease;
+    overflow: hidden;
   }
 
   main.focus-mode {
@@ -414,6 +434,7 @@
     align-items: center;
     justify-content: center;
     min-height: 0;
+    overflow: hidden;
   }
 
   .bottom-bar {
@@ -450,5 +471,78 @@
     font-family: monospace;
     color: #666;
     margin-right: 0.25rem;
+  }
+
+  /* Touch controls for mobile */
+  .touch-controls {
+    display: none;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .touch-btn {
+    background: #1a1a1a;
+    border: 1px solid #333;
+    color: #888;
+    padding: 0.5rem 0.75rem;
+    border-radius: 6px;
+    font-size: 0.75rem;
+    cursor: pointer;
+    min-width: 44px;
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+  }
+
+  .touch-btn:active {
+    background: #333;
+    color: #fff;
+  }
+
+  .touch-btn svg {
+    width: 20px;
+    height: 20px;
+  }
+
+  .wpm-display {
+    color: #ff4444;
+    font-family: monospace;
+    font-size: 0.85rem;
+    min-width: 3rem;
+    text-align: center;
+  }
+
+  .mobile-only {
+    display: none;
+  }
+
+  .desktop-only {
+    display: flex;
+  }
+
+  /* Mobile styles */
+  @media (max-width: 600px) {
+    main {
+      padding: 1rem;
+    }
+
+    main.focus-mode {
+      padding: 0.5rem;
+    }
+
+    .panel-overlay {
+      padding: 1rem;
+    }
+
+    .desktop-only {
+      display: none;
+    }
+
+    .mobile-only {
+      display: flex;
+    }
   }
 </style>

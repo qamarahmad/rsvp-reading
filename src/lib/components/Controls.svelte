@@ -171,4 +171,24 @@
   .control-btn.restart:hover:not(:disabled) {
     background: #444;
   }
+
+  @media (max-width: 600px) {
+    .controls {
+      gap: 0.75rem;
+    }
+
+    .control-btn {
+      padding: 0.875rem 1.25rem;
+      min-height: 48px; /* Touch-friendly minimum */
+    }
+
+    .control-btn span {
+      display: none;
+    }
+
+    .controls.minimal .control-btn {
+      width: 48px;
+      height: 48px;
+    }
+  }
 </style>

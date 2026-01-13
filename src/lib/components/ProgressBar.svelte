@@ -58,4 +58,11 @@
   .wpm {
     color: #ff4444;
   }
+
+  @media (max-width: 600px) {
+    .stats {
+      font-size: 0.75rem;
+      gap: 0.5rem;
+    }
+  }
 </style>

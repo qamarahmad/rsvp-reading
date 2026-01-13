@@ -248,4 +248,22 @@
     opacity: 0.5;
     cursor: not-allowed;
   }
+
+  @media (max-width: 600px) {
+    .text-input-panel {
+      max-width: 100%;
+      padding: 1rem;
+      border-radius: 8px;
+    }
+
+    textarea {
+      min-height: 100px;
+      font-size: 16px; /* Prevents iOS zoom */
+    }
+
+    .upload-btn {
+      padding: 0.875rem;
+      font-size: 0.9rem;
+    }
+  }
 </style>

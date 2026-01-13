@@ -21,12 +21,17 @@ body {
   margin: 0;
   padding: 0;
   min-width: 320px;
-  min-height: 100vh;
+  height: 100vh;
+  height: 100dvh;
   background-color: #000;
+  overflow: hidden;
+  position: fixed;
+  width: 100%;
 }
 
 #app {
   width: 100%;
-  min-height: 100vh;
+  height: 100%;
   background-color: #000;
+  overflow: hidden;
 }

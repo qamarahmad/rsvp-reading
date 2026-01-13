@@ -18,33 +18,34 @@
     <div class="marker-line bottom"></div>
   </div>
 
-  <div class="word-wrapper">
-    <div
-      class="word-container"
-      style="opacity: {opacity}; transition: opacity {fadeEnabled ? fadeDuration : 0}ms ease-in-out;"
-    >
-      {#if word}
-        <span class="word">
-          <span class="before-orp">{beforeOrp}</span>
-          <span class="orp">{orpLetter}</span>
-          <span class="after-orp">{afterOrp}</span>
-        </span>
-      {:else}
-        <span class="placeholder">Ready</span>
-      {/if}
-    </div>
+  <div
+    class="word-container"
+    style="opacity: {opacity}; transition: opacity {fadeEnabled ? fadeDuration : 0}ms ease-in-out;"
+  >
+    {#if word}
+      <!-- ORP letter is absolutely positioned at center -->
+      <span class="orp">{orpLetter}</span>
+      <!-- Before text positioned to the left of center -->
+      <span class="before-orp">{beforeOrp}</span>
+      <!-- After text positioned to the right of center -->
+      <span class="after-orp">{afterOrp}</span>
+    {:else}
+      <span class="placeholder">Ready</span>
+    {/if}
   </div>
 </div>
 
 <style>
   .rsvp-display {
     position: relative;
+    width: 100%;
     height: 100%;
     min-height: 300px;
     display: flex;
     align-items: center;
     justify-content: center;
     flex: 1;
+    overflow: hidden;
   }
 
   .focus-marker {
@@ -54,7 +55,7 @@
     height: 100%;
     width: 3px;
     pointer-events: none;
-    z-index: 1;
+    z-index: 10;
   }
 
   .marker-line {
@@ -74,65 +75,46 @@
     background: linear-gradient(to top, #ff4444, transparent);
   }
 
-  .word-wrapper {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    /* Fixed height to prevent layout shifts */
-    height: clamp(4rem, 12vw, 8rem);
-  }
-
   .word-container {
-    /* Use a reliable monospace font stack */
+    position: relative;
     font-family: 'SF Mono', 'Monaco', 'Inconsolata', 'Roboto Mono', 'Source Code Pro', 'Menlo', 'Consolas', monospace;
     font-size: clamp(3rem, 8vw, 6rem);
     font-weight: 500;
-    /* Critical: fixed line-height prevents vertical movement */
     line-height: 1;
-    letter-spacing: 0.02em;
     white-space: nowrap;
-    position: relative;
-    z-index: 2;
-    /* Ensure consistent text rendering */
     text-rendering: geometricPrecision;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-  }
-
-  .word {
-    display: inline-flex;
-    /* Baseline alignment ensures all characters sit on the same line */
-    align-items: baseline;
-    /* Fixed height container */
-    height: 1em;
-  }
-
-  .before-orp {
-    color: #fff;
-    text-align: right;
-    display: inline-block;
-    min-width: 6ch;
-    width: auto;
-    /* Right-align text to flow towards center */
-    direction: rtl;
-    unicode-bidi: bidi-override;
+    /* Container needs width for absolute children to position against */
+    width: 100%;
+    height: 1.2em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 
   .orp {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
     color: #ff4444;
     font-weight: 700;
     text-shadow: 0 0 30px rgba(255, 68, 68, 0.6);
-    display: inline-block;
-    text-align: center;
-    /* Fixed width of exactly one character */
-    width: 1ch;
+    z-index: 2;
+  }
+
+  .before-orp {
+    position: absolute;
+    right: calc(50% + 0.5ch);
+    color: #fff;
+    text-align: right;
   }
 
   .after-orp {
+    position: absolute;
+    left: calc(50% + 0.5ch);
     color: #fff;
     text-align: left;
-    display: inline-block;
-    min-width: 6ch;
   }
 
   .placeholder {
@@ -141,5 +123,15 @@
     font-weight: 300;
     font-family: system-ui, sans-serif;
     line-height: 1;
+  }
+
+  @media (max-width: 600px) {
+    .rsvp-display {
+      min-height: 200px;
+    }
+
+    .marker-line {
+      height: 30px;
+    }
   }
 </style>

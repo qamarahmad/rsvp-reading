@@ -193,4 +193,22 @@
     border-left: 2px solid #333;
     margin-left: 0.5rem;
   }
+
+  @media (max-width: 600px) {
+    .settings-panel {
+      max-width: 100%;
+      padding: 1rem;
+      border-radius: 8px;
+    }
+
+    .setting input[type="range"]::-webkit-slider-thumb {
+      width: 20px;
+      height: 20px;
+    }
+
+    .setting input[type="checkbox"] {
+      width: 22px;
+      height: 22px;
+    }
+  }
 </style>
