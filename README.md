@@ -2,6 +2,10 @@
 
 A Svelte-based Rapid Serial Visual Presentation (RSVP) reader for speed reading with PDF and EPUB support.
 
+## Online version / DEMO
+
+Link: https://rsvp.n0name.eu/
+
 ## What is RSVP?
 
 Rapid Serial Visual Presentation (RSVP) is a technique where text is displayed one word at a time at a fixed focal point. This eliminates the need for eye movements (saccades) during reading, potentially allowing for significantly faster reading speeds.
