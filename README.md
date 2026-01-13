@@ -245,3 +245,4 @@ This project is open source and available under the [MIT License](LICENSE).
 - Built with [Svelte](https://svelte.dev/) and [Vite](https://vitejs.dev/)
 - PDF parsing powered by [PDF.js](https://mozilla.github.io/pdf.js/)
 - EPUB parsing powered by [Epub.js](https://github.com/futurepress/epub.js/)
+
