@@ -432,6 +432,7 @@
         <h3>Jump to position</h3>
         <p class="jump-hint">Enter word number (e.g., 150) or percentage (e.g., 50%)</p>
         <form on:submit|preventDefault={() => jumpToWord(jumpToValue)}>
+          <!-- svelte-ignore a11y_autofocus -->
           <input
             type="text"
             bind:value={jumpToValue}
