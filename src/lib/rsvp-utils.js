@@ -8,50 +8,55 @@
  * @returns {string[]} Array of words
  */
 export function parseText(text) {
-    if (!text || typeof text !== "string") return [];
-    return text.trim().split(/\s+/).filter((w) => w.length > 0);
+  if (!text || typeof text !== "string") return [];
+  return text.trim().split(/\s+/).filter((w) => w.length > 0);
 }
 
 /**
  * Calculate the Optimal Recognition Point (ORP) index for a word.
  * The ORP is the character position where the eye naturally focuses when reading.
  * Based on word length, this determines which letter should be highlighted.
+ * Supports all Unicode letters (Latin, Cyrillic, CJK, Arabic, etc.)
  *
  * @param {string} word - The word to calculate ORP for
  * @returns {number} The index of the letter that should be highlighted
  */
 export function getORPIndex(word) {
-    if (!word || typeof word !== "string") return 0;
-    const len = word.replace(/[^a-zA-Z]/g, "").length;
-    if (len <= 1) return 0;
-    if (len <= 3) return 0;
-    if (len <= 5) return 1;
-    if (len <= 9) return 2;
-    if (len <= 12) return 3;
-    return Math.floor(Math.log2(len - 1)) + 1;
+  if (!word || typeof word !== "string") return 0;
+  const len = word.replace(/[^\p{L}]/gu, "").length;
+  if (len <= 1) return 0;
+  if (len <= 3) return 0;
+  if (len <= 5) return 1;
+  if (len <= 9) return 2;
+  if (len <= 12) return 3;
+  return Math.floor(Math.log2(len - 1)) + 1;
 }
 
 /**
  * Get the actual character index for ORP, accounting for leading punctuation.
  * This adjusts the ORP index to skip over non-letter characters.
+ * Supports all Unicode letters.
  *
  * @param {string} word - The word to calculate actual ORP for
  * @returns {number} The actual character index in the word
  */
+// Pre-compiled regex for performance
+const unicodeLetterRegex = /\p{L}/u;
+
 export function getActualORPIndex(word) {
-    if (!word || typeof word !== "string") return 0;
+  if (!word || typeof word !== "string") return 0;
 
-    const orpIndex = getORPIndex(word);
-    let letterCount = 0;
+  const orpIndex = getORPIndex(word);
+  let letterCount = 0;
 
-    for (let i = 0; i < word.length; i++) {
-        if (/[a-zA-Z]/.test(word[i])) {
-            if (letterCount === orpIndex) return i;
-            letterCount++;
-        }
+  for (let i = 0; i < word.length; i++) {
+    if (unicodeLetterRegex.test(word[i])) {
+      if (letterCount === orpIndex) return i;
+      letterCount++;
     }
+  }
 
-    return Math.min(orpIndex, word.length - 1);
+  return Math.min(orpIndex, word.length - 1);
 }
 
 /**
@@ -65,39 +70,39 @@ export function getActualORPIndex(word) {
  * @returns {number} Delay in milliseconds
  */
 export function getWordDelay(
-    word,
-    wordsPerMinute,
-    pauseOnPunctuation = true,
-    punctuationMultiplier = 2,
-    wordLengthWPMMultiplier = 0,
+  word,
+  wordsPerMinute,
+  pauseOnPunctuation = true,
+  punctuationMultiplier = 2,
+  wordLengthWPMMultiplier = 0,
 ) {
-    if (!word || typeof word !== "string") return 60000 / wordsPerMinute;
-    if (!wordsPerMinute || wordsPerMinute <= 0) return 200; // Default fallback
+  if (!word || typeof word !== "string") return 60000 / wordsPerMinute;
+  if (!wordsPerMinute || wordsPerMinute <= 0) return 200; // Default fallback
 
-    var baseDelay = 60000 / wordsPerMinute;
+  var baseDelay = 60000 / wordsPerMinute;
 
-    // Longer pause for longer word
-    const longWordThreshold = 12;
-    if (word.length >= longWordThreshold) {
-        // for every character above 12, add wordLengthWPMMultiplier percentage points to delay
-        baseDelay *= 1 +
-            ((wordLengthWPMMultiplier / 100) *
-                (word.length - longWordThreshold));
+  // Longer pause for longer word
+  const longWordThreshold = 12;
+  if (word.length >= longWordThreshold) {
+    // for every character above 12, add wordLengthWPMMultiplier percentage points to delay
+    baseDelay *= 1 +
+      ((wordLengthWPMMultiplier / 100) *
+        (word.length - longWordThreshold));
+  }
+
+  if (pauseOnPunctuation) {
+    // Longer pause for sentence-ending punctuation
+    if (/[.!?;:]$/.test(word)) {
+      return baseDelay * punctuationMultiplier;
     }
-
-    if (pauseOnPunctuation) {
-        // Longer pause for sentence-ending punctuation
-        if (/[.!?;:]$/.test(word)) {
-            return baseDelay * punctuationMultiplier;
-        }
-        // Shorter pause for commas
-        if (/[,]$/.test(word)) {
-            return baseDelay * 1.5;
-        }
+    // Shorter pause for commas
+    if (/[,]$/.test(word)) {
+      return baseDelay * 1.5;
     }
+  }
 
-    console.log(baseDelay);
-    return baseDelay;
+  console.log(baseDelay);
+  return baseDelay;
 }
 
 /**
@@ -108,15 +113,15 @@ export function getWordDelay(
  * @returns {string} Formatted time string (e.g., "2:30")
  */
 export function formatTimeRemaining(remainingWords, wordsPerMinute) {
-    if (remainingWords <= 0 || !wordsPerMinute || wordsPerMinute <= 0) {
-        return "0:00";
-    }
+  if (remainingWords <= 0 || !wordsPerMinute || wordsPerMinute <= 0) {
+    return "0:00";
+  }
 
-    const seconds = Math.ceil((remainingWords / wordsPerMinute) * 60);
-    const mins = Math.floor(seconds / 60);
-    const secs = seconds % 60;
+  const seconds = Math.ceil((remainingWords / wordsPerMinute) * 60);
+  const mins = Math.floor(seconds / 60);
+  const secs = seconds % 60;
 
-    return `${mins}:${secs.toString().padStart(2, "0")}`;
+  return `${mins}:${secs.toString().padStart(2, "0")}`;
 }
 
 /**
@@ -126,17 +131,17 @@ export function formatTimeRemaining(remainingWords, wordsPerMinute) {
  * @returns {{ before: string, orp: string, after: string }} Word parts
  */
 export function splitWordForDisplay(word) {
-    if (!word || typeof word !== "string") {
-        return { before: "", orp: "", after: "" };
-    }
+  if (!word || typeof word !== "string") {
+    return { before: "", orp: "", after: "" };
+  }
 
-    const orpIndex = getActualORPIndex(word);
+  const orpIndex = getActualORPIndex(word);
 
-    return {
-        before: word.slice(0, orpIndex),
-        orp: word[orpIndex] || "",
-        after: word.slice(orpIndex + 1),
-    };
+  return {
+    before: word.slice(0, orpIndex),
+    orp: word[orpIndex] || "",
+    after: word.slice(orpIndex + 1),
+  };
 }
 
 /**
@@ -147,9 +152,9 @@ export function splitWordForDisplay(word) {
  * @returns {boolean} Whether to pause
  */
 export function shouldPauseAtWord(wordIndex, pauseAfterWords) {
-    if (pauseAfterWords <= 0) return false;
-    if (wordIndex <= 0) return false;
-    return wordIndex % pauseAfterWords === 0;
+  if (pauseAfterWords <= 0) return false;
+  if (wordIndex <= 0) return false;
+  return wordIndex % pauseAfterWords === 0;
 }
 
 /**
@@ -160,16 +165,16 @@ export function shouldPauseAtWord(wordIndex, pauseAfterWords) {
  * @returns {{ subset: string[], centerOffset: number }}
  */
 export function extractWordFrame(allWords, centerIdx, frameSize) {
-    if (frameSize <= 1 || centerIdx >= allWords.length) {
-        return { subset: [allWords[centerIdx] || ""], centerOffset: 0 };
-    }
+  if (frameSize <= 1 || centerIdx >= allWords.length) {
+    return { subset: [allWords[centerIdx] || ""], centerOffset: 0 };
+  }
 
-    const radius = Math.floor(frameSize / 2);
-    const leftBound = Math.max(0, centerIdx - radius);
-    const rightBound = Math.min(allWords.length, centerIdx + radius + 1);
+  const radius = Math.floor(frameSize / 2);
+  const leftBound = Math.max(0, centerIdx - radius);
+  const rightBound = Math.min(allWords.length, centerIdx + radius + 1);
 
-    const subset = allWords.slice(leftBound, rightBound);
-    const centerOffset = centerIdx - leftBound;
+  const subset = allWords.slice(leftBound, rightBound);
+  const centerOffset = centerIdx - leftBound;
 
-    return { subset, centerOffset };
+  return { subset, centerOffset };
 }
