@@ -81,13 +81,10 @@ export function getWordDelay(
 
   var baseDelay = 60000 / wordsPerMinute;
 
-  // Longer pause for longer word
-  const longWordThreshold = 12;
-  if (word.length >= longWordThreshold) {
-    // for every character above 12, add wordLengthWPMMultiplier percentage points to delay
-    baseDelay *= 1 +
-      ((wordLengthWPMMultiplier / 100) *
-        (word.length - longWordThreshold));
+  // Longer pause for long words (12+ characters is roughly 2 standard deviations above average English word length)
+  if (wordLengthWPMMultiplier > 0 && word.length >= 12) {
+    // For every character above 12, add wordLengthWPMMultiplier percentage points to delay
+    baseDelay *= 1 + ((wordLengthWPMMultiplier / 100) * (word.length - 12));
   }
 
   if (pauseOnPunctuation) {
@@ -101,7 +98,6 @@ export function getWordDelay(
     }
   }
 
-  console.log(baseDelay);
   return baseDelay;
 }
 
